@@ -17,6 +17,10 @@ id=("ASM1904710v1", "ASM1602849v1")
 #	esearch -db nuccore -query ${FAST} | efetch -format fasta > ${FAST}.fa
 #done
 
+DIR=./my_files
+rm $DIR
+mkdir $DIR
+cd $DIR
 
 for FAST in "${id[@]}"
 do
@@ -29,6 +33,17 @@ do
         done ;
     done
 
+   DIR2=./unziped
+   rm $DIR2
+   mkdir $DIR2
+
+   for f in *.gz; do
+	  STEM=$(basename "${f}" .gz)
+ 	 gunzip -c "${f}" > $DIR2/"${STEM}"
+	done
+   
+   
+   #gunzip -c $(ls *.gz) > $DIR2
 
 
 echo "DONE"
